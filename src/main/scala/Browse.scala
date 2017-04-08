@@ -118,12 +118,10 @@ abstract class Browse extends Plugin
 			override def incompleteInputError(off: Int, msg: String) {}
 
       // Scala 2.11 (TODO Test)
-			override def skipComment(): Boolean = {
-	      super.skipComment() && {
-	      	addComment(offset, charOffset - 2)
-	      	true
-	      }
-	    }
+      override def finishDocComment(): Unit = {
+        super.finishDocComment()
+        addComment(offset, charOffset - 2)
+      }
 
 			override def nextToken() {
 				val offset0 = offset
